@@ -1,0 +1,1 @@
+String data = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
