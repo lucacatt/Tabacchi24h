@@ -1,0 +1,88 @@
+import java.io.File;
+import com.github.sarxos.webcam.Webcam;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+
+ public class WebcamT extends Thread {
+
+    @Override
+    public void run() {
+        //Apertura webcam e crezione di una immagine PNG della webcam per 5 volte il tread poi verrà modificato è solo una prova
+        Webcam webcam = com.github.sarxos.webcam.Webcam.getDefault();
+        webcam.open();
+        for (int i = 0; i < 5; i++) {
+            try {
+                ImageIO.write(webcam.getImage(), "PNG", new File("Barcode.png"));
+            } catch (IOException ex) {
+                Logger.getLogger(WebcamT.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(WebcamT.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+}
+
+Dependencies:
+
+
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>14</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-swing</artifactId>
+            <version>14</version>
+        </dependency>
+        <dependency>
+            <groupId>uk.co.caprica</groupId>
+            <artifactId>vlcj</artifactId>
+            <version>4.5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>uk.co.caprica</groupId>
+            <artifactId>vlcj-javafx</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.dynamsoft</groupId>
+            <artifactId>dbr</artifactId>
+            <version>8.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.external</groupId>
+            <artifactId>AbsoluteLayout</artifactId>
+            <version>RELEASE121</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>zxing-parent</artifactId>
+            <version>3.4.1</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>com.github.sarxos</groupId>
+            <artifactId>webcam-capture</artifactId>
+            <version>0.3.13-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.sarxos</groupId>
+            <artifactId>webcam-capture</artifactId>
+            <version>0.3.13-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>group.id</groupId>
+            <artifactId>artifact.id</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+Repositories:
+        <repository>
+            <id>dbr</id>
+            <url>https://download2.dynamsoft.com/maven/dbr/jar</url>
+        </repository>

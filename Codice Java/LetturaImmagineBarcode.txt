@@ -1,0 +1,13 @@
+import com.pqscan.barcodereader.BarCodeType;
+import com.pqscan.barcodereader.BarcodeResult;
+import com.pqscan.barcodereader.BarcodeScanner;
+
+//lettura di un'immagine che ha un barcode con codifica Code 39 (quello usato sulle carte d'identita'
+       /* try {
+            BarcodeResult[] results = BarcodeScanner.Scan("hello-world.png", BarCodeType.Code39);
+            for (int i = 0; i < results.length; i++) {
+                System.out.println(results[i].getData());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
