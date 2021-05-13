@@ -1,0 +1,134 @@
+@Override
+    public void paint(Graphics g) {
+        Image offscreen = createImage(this.getWidth(), this.getHeight());
+        Graphics offgc = offscreen.getGraphics();
+        offgc.drawImage(new javax.swing.ImageIcon("Images\\HERO-ART-microsoft_azure_1920x1000_nologo.jpg").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
+        offgc.drawImage(new javax.swing.ImageIcon("Images\\lastampatabacchi.png").getImage(), 300, 300, this);
+        offgc.drawImage(new javax.swing.ImageIcon("Images\\lemon-water.jpg").getImage(), 800, 300, 248, 314, this);
+        offgc.drawImage(new javax.swing.ImageIcon("Images\\d9657d2229731ed2bd5debc01b20f9fa.jpg").getImage(), 1300, 300, 300, 314, this);
+        offgc.setColor(Color.white);
+        for (int i = 0; i < 4; i++) {
+            offgc.drawLine(320, 622 + i, 521, 622 + i);
+        }
+        if (!Dati.getInstance().isConnected()) {
+            offgc.drawImage(new javax.swing.ImageIcon("Images\\images.png").getImage(), this.getWidth() / 2 - 200, this.getHeight() / 2 - 200, 300, 314, this);
+            offgc.setColor(Color.red);
+            offgc.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
+            offgc.drawString("ARDUINO NON CONNESSO", this.getWidth() / 2 - 210, this.getHeight() / 2 + 80);
+        }
+        if (Dati.getInstance().getKey() == 39) {
+            if (Dati.getInstance().getSpos() == 0) {
+                Dati.getInstance().setKey(0);
+                Dati.getInstance().setLastspos('d');
+                Dati.getInstance().setSpos(1);
+            } else if (Dati.getInstance().getSpos() == 1) {
+                Dati.getInstance().setKey(0);
+                Dati.getInstance().setLastspos('d');
+                Dati.getInstance().setSpos(2);
+            } else if (Dati.getInstance().getSpos() == 2) {
+                Dati.getInstance().setKey(0);
+                Dati.getInstance().setLastspos('d');
+                Dati.getInstance().setSpos(0);
+            }
+        }
+        if (Dati.getInstance().getKey() == 37) {
+            if (Dati.getInstance().getSpos() == 0) {
+                Dati.getInstance().setKey(0);
+                Dati.getInstance().setLastspos('s');
+                Dati.getInstance().setSpos(2);
+            } else if (Dati.getInstance().getSpos() == 1) {
+                Dati.getInstance().setKey(0);
+                Dati.getInstance().setLastspos('s');
+                Dati.getInstance().setSpos(0);
+            } else if (Dati.getInstance().getSpos() == 2) {
+                Dati.getInstance().setKey(0);
+                Dati.getInstance().setLastspos('s');
+                Dati.getInstance().setSpos(1);
+            }
+        }
+        if (Dati.getInstance().getLastspos() == 'd') {
+            offgc = Right(offgc);
+        } else if (Dati.getInstance().getLastspos() == 's') {
+            offgc = Left(offgc);
+        }
+        if (Dati.getInstance().getKey() == 10) {
+
+        }
+        g.drawImage(offscreen, 0, 0, null);
+    }
+
+    private Graphics Right(Graphics offgc) {
+        switch (Dati.getInstance().getSpos()) {
+            case 1:
+                offgc.drawImage(new javax.swing.ImageIcon("Images\\HERO-ART-microsoft_azure_1920x1000_nologo.jpg").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
+                offgc.drawImage(new javax.swing.ImageIcon("Images\\lastampatabacchi.png").getImage(), 300, 300, this);
+                offgc.drawImage(new javax.swing.ImageIcon("Images\\lemon-water.jpg").getImage(), 800, 300, 248, 314, this);
+                offgc.drawImage(new javax.swing.ImageIcon("Images\\d9657d2229731ed2bd5debc01b20f9fa.jpg").getImage(), 1300, 300, 300, 314, this);
+                offgc.setColor(Color.white);
+                for (int i = 0; i < 4; i++) {
+                    offgc.drawLine(820, 622 + i, 1020, 622 + i);
+                }
+                return offgc;
+            case 2:
+                offgc.drawImage(new javax.swing.ImageIcon("Images\\HERO-ART-microsoft_azure_1920x1000_nologo.jpg").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
+                offgc.drawImage(new javax.swing.ImageIcon("Images\\lastampatabacchi.png").getImage(), 300, 300, this);
+                offgc.drawImage(new javax.swing.ImageIcon("Images\\lemon-water.jpg").getImage(), 800, 300, 248, 314, this);
+                offgc.drawImage(new javax.swing.ImageIcon("Images\\d9657d2229731ed2bd5debc01b20f9fa.jpg").getImage(), 1300, 300, 300, 314, this);
+                offgc.setColor(Color.white);
+                for (int i = 0; i < 4; i++) {
+                    offgc.drawLine(1320, 622 + i, 1580, 622 + i);
+                }
+                return offgc;
+            case 0:
+                offgc.drawImage(new javax.swing.ImageIcon("Images\\HERO-ART-microsoft_azure_1920x1000_nologo.jpg").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
+                offgc.drawImage(new javax.swing.ImageIcon("Images\\lastampatabacchi.png").getImage(), 300, 300, this);
+                offgc.drawImage(new javax.swing.ImageIcon("Images\\lemon-water.jpg").getImage(), 800, 300, 248, 314, this);
+                offgc.drawImage(new javax.swing.ImageIcon("Images\\d9657d2229731ed2bd5debc01b20f9fa.jpg").getImage(), 1300, 300, 300, 314, this);
+                offgc.setColor(Color.white);
+                for (int i = 0; i < 4; i++) {
+                    offgc.drawLine(320, 622 + i, 521, 622 + i);
+                }
+                return offgc;
+            default:
+                break;
+        }
+        return offgc;
+    }
+
+    private Graphics Left(Graphics offgc) {
+        switch (Dati.getInstance().getSpos()) {
+            case 1:
+                offgc.drawImage(new javax.swing.ImageIcon("Images\\HERO-ART-microsoft_azure_1920x1000_nologo.jpg").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
+                offgc.drawImage(new javax.swing.ImageIcon("Images\\lastampatabacchi.png").getImage(), 300, 300, this);
+                offgc.drawImage(new javax.swing.ImageIcon("Images\\lemon-water.jpg").getImage(), 800, 300, 248, 314, this);
+                offgc.drawImage(new javax.swing.ImageIcon("Images\\d9657d2229731ed2bd5debc01b20f9fa.jpg").getImage(), 1300, 300, 300, 314, this);
+                offgc.setColor(Color.white);
+                for (int i = 0; i < 4; i++) {
+                    offgc.drawLine(820, 622 + i, 1020, 622 + i);
+                }
+                return offgc;
+            case 2:
+                offgc.drawImage(new javax.swing.ImageIcon("Images\\HERO-ART-microsoft_azure_1920x1000_nologo.jpg").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
+                offgc.drawImage(new javax.swing.ImageIcon("Images\\lastampatabacchi.png").getImage(), 300, 300, this);
+                offgc.drawImage(new javax.swing.ImageIcon("Images\\lemon-water.jpg").getImage(), 800, 300, 248, 314, this);
+                offgc.drawImage(new javax.swing.ImageIcon("Images\\d9657d2229731ed2bd5debc01b20f9fa.jpg").getImage(), 1300, 300, 300, 314, this);
+                offgc.setColor(Color.white);
+                for (int i = 0; i < 4; i++) {
+                    offgc.drawLine(1320, 622 + i, 1580, 622 + i);
+                }
+                return offgc;
+            case 0:
+                offgc.drawImage(new javax.swing.ImageIcon("Images\\HERO-ART-microsoft_azure_1920x1000_nologo.jpg").getImage(), 0, 0, this.getWidth(), this.getHeight(), this);
+                offgc.drawImage(new javax.swing.ImageIcon("Images\\lastampatabacchi.png").getImage(), 300, 300, this);
+                offgc.drawImage(new javax.swing.ImageIcon("Images\\lemon-water.jpg").getImage(), 800, 300, 248, 314, this);
+                offgc.drawImage(new javax.swing.ImageIcon("Images\\d9657d2229731ed2bd5debc01b20f9fa.jpg").getImage(), 1300, 300, 300, 314, this);
+                offgc.setColor(Color.white);
+                for (int i = 0; i < 4; i++) {
+                    offgc.drawLine(320, 622 + i, 521, 622 + i);
+                }
+                return offgc;
+            default:
+                break;
+        }
+        return offgc;
+    }
