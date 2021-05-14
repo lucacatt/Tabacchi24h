@@ -1,0 +1,36 @@
+
+import arduino.Arduino;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ *
+ * @author Stefano Potenza
+ */
+public class ThreadSerial extends Thread{
+
+    @Override
+    public void run() {
+        Arduino sp = new Arduino();
+        sp.setPortDescription("COM4");
+        sp.setBaudRate(9600);
+        do {
+            if (sp.openConnection()) {
+                Condivisa.getInstance().setConnesso(true);
+            } else {
+                Condivisa.getInstance().setConnesso(false);
+            }
+            while (Condivisa.getInstance().isConnesso()) {
+                for (int i = 0; i < 10; i++) {
+                    sp.serialWrite("f");
+                }
+                Condivisa.getInstance().setSeriale(sp.serialRead());
+                sp.closeConnection();
+            }
+        } while (!Condivisa.getInstance().isConnesso());
+    }
+}

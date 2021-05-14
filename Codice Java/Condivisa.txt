@@ -1,0 +1,54 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ *
+ * @author Stefano Potenza
+ */
+public class Condivisa {
+    private int tempo;
+    private static Condivisa _instance;
+    private boolean connesso;
+    private String seriale;
+
+    public String getSeriale() {
+        return seriale;
+    }
+
+    public void setSeriale(String seriale) {
+        this.seriale = seriale;
+    }
+    
+    public void setConnesso(boolean connesso) {
+        this.connesso = connesso;
+    }
+
+    public boolean isConnesso() {
+        return connesso;
+    }
+    
+    private Condivisa() {
+        tempo = 0;
+    }
+
+    public void setTempo(int tempo) {
+        this.tempo += tempo;
+    }
+
+    public int getTempo() {
+        return tempo;
+    }
+    
+    public static Condivisa getInstance() {
+        if (_instance == null)
+    synchronized (Condivisa.class) {
+            if (_instance == null) {
+                _instance = new Condivisa();
+            }
+        }
+        return _instance;
+    }
+}
