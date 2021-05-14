@@ -1,0 +1,33 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ *
+ * @author cattaneo_luca03
+ */
+import arduino.*;
+
+public class LetturaVendita extends Thread {
+
+    @Override
+    public void run() {
+        Arduino sp = new Arduino();
+        sp.setPortDescription("COM4");
+        sp.setBaudRate(9600);
+        do {
+            if (sp.openConnection()) {
+                Dati.getInstance().setConnected(true);
+            } else {
+                Dati.getInstance().setConnected(false);
+            }
+            while (Dati.getInstance().isConnected()) {
+                String lettura = Dati.getInstance().setEvent(sp.serialRead());
+                Dati.getInstance().productSold(lettura);
+                sp.serialWrite("f");
+                sp.closeConnection();
+            }
+        } while (!Dati.getInstance().isConnected());
+    }
