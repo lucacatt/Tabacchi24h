@@ -1,0 +1,89 @@
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public class GestioneScorte extends Thread {
+
+    private FileManagment file;
+    private ArrayList<Prodotto> pr;
+    private int lastSigarette = 0;
+    private int lastBibite = 0;
+    private int lastSnack = 0;
+
+    @Override
+    public void run() {
+        int count = 1;
+        file = new FileManagment();
+        pr = new ArrayList<Prodotto>();
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(GestioneScorte.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        while (!Dati.getInstance().isRefresh()) {
+            switch (count) {
+                case 1 -> {
+                    if (Dati.getInstance().isChanged()) {
+                        try {
+                            file.setPath("Sigarette.txt");
+                            pr = file.ReadFile();
+                        } catch (FileNotFoundException ex) {
+                            Logger.getLogger(GestioneScorte.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        for (int i = lastSigarette; i < pr.size(); i++) {
+                            Dati.getInstance().setWriteSerial(pr.get(i).getNomeProdotto() + ";" + pr.get(i).getPrezzo() + ";" + pr.get(i).getScorte() + ";");
+                            try {
+                                Thread.sleep(10000);
+                            } catch (InterruptedException ex) {
+                                Logger.getLogger(GestioneScorte.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                        lastSigarette = pr.size() - 1;
+                        count++;
+                    }
+                }
+                case 2 -> {
+                    if (Dati.getInstance().isChanged()) {
+                        file.setPath("Bibite.txt");
+                        try {
+                            pr = file.ReadFile();
+                        } catch (FileNotFoundException ex) {
+                            Logger.getLogger(GestioneScorte.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        for (int i = lastBibite; i < pr.size(); i++) {
+                            Dati.getInstance().setWriteSerial(pr.get(i).getNomeProdotto() + ";" + pr.get(i).getPrezzo() + ";" + pr.get(i).getScorte() + ";");
+                            try {
+                                Thread.sleep(4000);
+                            } catch (InterruptedException ex) {
+                                Logger.getLogger(GestioneScorte.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                        lastBibite = pr.size() - 1;
+                        count++;
+                    }
+                }
+                case 3 -> {
+                    file.setPath("Snack.txt");
+                    try {
+                        pr = file.ReadFile();
+                    } catch (FileNotFoundException ex) {
+                        Logger.getLogger(GestioneScorte.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    for (int i = lastSnack; i < pr.size(); i++) {
+                        Dati.getInstance().setWriteSerial(pr.get(i).getNomeProdotto() + ";" + pr.get(i).getPrezzo() + ";" + pr.get(i).getScorte() + ";");
+                        try {
+                            Thread.sleep(4000);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(GestioneScorte.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    lastSnack = pr.size() - 1;
+                    count = 1;
+                    Dati.getInstance().setChange(false);
+                }
+
+            }
+        }
+    }
+}
