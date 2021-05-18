@@ -1,0 +1,77 @@
+ public void stockUpdate(String order) throws FileNotFoundException, IOException {
+        FilePath = "Sigarette.txt";
+        ArrayList<Prodotto> siga = ReadFile();
+        FilePath = "Bibite.txt";
+        ArrayList<Prodotto> bibite = ReadFile();
+        FilePath = "Snack.txt";
+        ArrayList<Prodotto> snack = ReadFile();
+        boolean trovato = false;
+        String file = "";
+        int pos = 0;
+        for (int i = 0; i < siga.size(); i++) {
+            if (siga.get(i).getNomeProdotto() == order) {
+                file = "Sigarette.txt";
+                trovato = true;
+                pos = i;
+                break;
+            }
+        }
+        if (!trovato) {
+            for (int i = 0; i < bibite.size(); i++) {
+                if (bibite.get(i).getNomeProdotto() == order) {
+                    file = "Bibite.txt";
+                    trovato = true;
+                    pos = i;
+                    break;
+                }
+            }
+        }
+        if (!trovato) {
+            for (int i = 0; i < snack.size(); i++) {
+                if (snack.get(i).getNomeProdotto() == order) {
+                    file = "Snack.txt";
+                    trovato = true;
+                    pos = i;
+                    break;
+                }
+            }
+        }
+        ArrayList<Prodotto> array;
+        if (file == "Sigarette.txt") {
+            array = siga;
+        } else if (file == "Bibite.txt") {
+            array = bibite;
+        } else {
+            array = snack;
+        }
+        if (array.get(pos).getScorte() >= 2) {
+            array.get(pos).setScorte(array.get(pos).getScorte() - 1);
+            String contenuto = "";
+            FilePath = file;
+            for (int i = 0; i < array.size(); i++) {
+                contenuto += toCSS(array.get(i));
+            }
+            WriteToFile(contenuto);
+        } else {
+            File inputFile = new File(file);
+            File tempFile = new File("myTempFile.txt");
+
+            BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+
+            String lineToRemove = toCSS(array.get(pos));
+            String currentLine;
+
+            while ((currentLine = reader.readLine()) != null) {
+                // trim newline when comparing with lineToRemove
+                String trimmedLine = currentLine.trim();
+                if (trimmedLine.equals(lineToRemove)) {
+                    continue;
+                }
+                writer.write(currentLine + System.getProperty("line.separator"));
+            }
+            writer.close();
+            reader.close();
+            boolean successful = tempFile.renameTo(inputFile);
+        }
+    }
