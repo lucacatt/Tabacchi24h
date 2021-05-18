@@ -90,4 +90,32 @@ bool leggiProdotto()
   return false;
 }
 //--------------------------------------------------------------------------------------
-
+void menu()
+{
+  while (digitalRead(btn2) == LOW)
+  {
+    nome = p[contMenu].getNome();
+    prezzo = p[contMenu].getPrezzo();
+    lcd.setCursor(0, 0);
+    lcd.print(nome);
+    lcd.setCursor(0, 1);
+    lcd.print(prezzo);
+    while ((digitalRead(btn1) == LOW) && (digitalRead(btn3) == LOW))
+      ;
+    if (digitalRead(btn1) == HIGH)
+    {
+      if (contMenu < 1)
+        contMenu = 0;
+      else
+        contMenu--;
+    }
+    else if (digitalRead(btn3) == HIGH)
+    {
+      if (contMenu > cont - 2)
+        contMenu = cont - 1;
+      else
+        contMenu++;
+    }
+  }
+  acquisto();
+}
