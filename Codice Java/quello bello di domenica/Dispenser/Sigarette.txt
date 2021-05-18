@@ -1,0 +1,4 @@
+Marlboro gold;5.60;D:\Java\Dispenser\Images\Sigarette\marlboro-gold-touch.jpg;true;20
+Chesterfield rosse;4.90;D:\Java\Dispenser\Images\Sigarette\Chesterfield-Red.jpg;true;20
+Camel blue;5.90;C:\Users\Mattia\Dropbox\My PC (DESKTOP-35KK56L)\Downloads\quello bello di domenica\Dispenser\Images\Sigarette\camel-blue-hvt.jpg;true;20
+Winston blu;4;C:\Users\Mattia\Dropbox\My PC (DESKTOP-35KK56L)\Downloads\quello bello di domenica\Dispenser\Images\Sigarette\71AF9syWtaL._SS500_.jpg;true;20
