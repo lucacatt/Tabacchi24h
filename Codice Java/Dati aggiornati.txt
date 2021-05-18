@@ -1,0 +1,36 @@
+
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+
+public class Dati {
+
+    private static Dati _instance;
+    private boolean refresh;
+    private boolean connected;
+    private String event;
+    private String WriteSerial;
+    private int Key;
+    private int spos;
+    private int pos;
+    private char lastspos;
+    private boolean wr;
+    private ArrayList<String> nomi;
+    private ArrayList<Integer> quantita;
+
+    public synchronized boolean isWr() {
+        return wr;
+    }
+
+    public synchronized void setWr(boolean wr) {
+        this.wr = wr;
+    }
+
+    public int getPos() {
+        return pos;
+    }
+
+    public void setPos(int pos) {
+        this.pos = pos;
+    }
