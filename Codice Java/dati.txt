@@ -1,0 +1,109 @@
+public class Dati {
+
+    private static Dati _instance;
+    private boolean refresh;
+    private boolean connected;
+    private boolean change;
+    private String event;
+    private String WriteSerial;
+    private int Key;
+    private int spos;
+    private int pos;
+    private char lastspos;
+
+    public int getPos() {
+        return pos;
+    }
+
+    public void setPos(int pos) {
+        this.pos = pos;
+    }
+
+    public synchronized char getLastspos() {
+        return lastspos;
+    }
+
+    public synchronized void setLastspos(char lastspos) {
+        this.lastspos = lastspos;
+    }
+
+    public synchronized int getKey() {
+        return Key;
+    }
+
+    public synchronized String getWriteSerial() {
+        return WriteSerial;
+    }
+
+    public synchronized void setWriteSerial(String WriteSerial) {
+        this.WriteSerial = WriteSerial;
+    }
+
+    public synchronized void setKey(int Key) {
+        this.Key = Key;
+    }
+
+    private Dati() {
+        refresh = false;
+        connected = false;
+        change = true;
+        event = "";
+        spos = 0;
+        lastspos = ' ';
+    }
+
+    public int getSpos() {
+        return spos;
+    }
+
+    public void setSpos(int spos) {
+        this.spos = spos;
+    }
+
+    public synchronized boolean isConnected() {
+        return connected;
+    }
+
+    public synchronized String getEvent() {
+        if (!"".equals(event)) {
+            return event;
+        } else {
+            return "";
+        }
+    }
+
+    public synchronized void setEvent(String event) {
+        this.event = event;
+    }
+
+    public void setConnected(boolean connected) {
+        this.connected = connected;
+    }
+
+    public synchronized boolean isRefresh() {
+        return refresh;
+    }
+
+    public void setRefresh(boolean refresh) {
+        this.refresh = refresh;
+    }
+
+    public boolean isChanged() {
+        return change;
+    }
+
+    public void setChange(boolean change) {
+        this.change = change;
+    }
+
+    public static Dati getInstance() {
+        if (_instance == null)
+    synchronized (Dati.class) {
+            if (_instance == null) {
+                _instance = new Dati();
+            }
+        }
+        return _instance;
+    }
+
+}
