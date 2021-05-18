@@ -90,6 +90,45 @@ bool leggiProdotto()
   return false;
 }
 //--------------------------------------------------------------------------------------
+void acquisto()
+{
+  Serial.print("w");
+  char t = ' ';
+  while (t == ' ')
+  {
+    if (Serial.available() > 0)
+    {
+      t = Serial.read();
+    }
+  }
+  if (t == '-')
+  {
+    if (p[contMenu].getMaggiorenne)
+    {
+      lcd.clear();
+      lcd.print("ERRORE MINORENNE");
+    }
+    else
+    {
+      lcd.setCursor(0, 0);
+      lcd.print("acquistato");
+      lcd.setCursor(0, 1);
+      lcd.print(p[contMenu].getNome());
+      Serial.println(p[contMenu].getNome());
+      delay(5000);
+    }
+  }
+  else
+  {
+    lcd.setCursor(0, 0);
+    lcd.print("acquistato");
+    lcd.setCursor(0, 1);
+    lcd.print(p[contMenu].getNome());
+    Serial.println(p[contMenu].getNome());
+    delay(5000);
+  }
+}
+//--------------------------------------------------------------------------------------
 void menu()
 {
   while (digitalRead(btn2) == LOW)
@@ -118,4 +157,12 @@ void menu()
     }
   }
   acquisto();
+}
+//--------------------------------------------------------------------------------------
+void serialFlush()
+{
+  while (Serial.available() > 0)
+  {
+    char t = Serial.read();
+  }
 }
