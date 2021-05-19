@@ -98,8 +98,6 @@ bool leggiProdotto()
       prodotto = Prodotto(c1, c2, maggiorenne, c4);
       p[cont] = prodotto;
       cont++;
-      if (cont > 1)
-        lcd.print(p[1].getNome());
       h++;
     }
     return false;
