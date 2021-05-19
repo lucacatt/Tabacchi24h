@@ -1,0 +1,78 @@
+Trasformazione in formato CSV di prodotti e lettura da file CSV di prodotti:
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ *
+ * @author Mattia Luca
+ */
+public class FileManagment {
+
+    /*Mattia:*/
+    private String FilePath;
+
+    public void setPath(String s) {
+        FilePath = s;
+    }
+
+    public String getFilePath() {
+        return FilePath;
+    }
+
+    public void WriteToFile(String Info) throws IOException {
+        Path p = Paths.get(FilePath);
+        Files.write(p, Info.getBytes(), StandardOpenOption.APPEND);
+    }
+
+    public Prodotto FromCSS(String s) {
+        Prodotto p = new Prodotto();
+        String[] spl = s.split(";");
+        p.setNomeProdotto(spl[0]);
+        p.setPrezzo(spl[1]);
+        p.setImmProdotto(spl[2]);
+        if ("true".equals(spl[3])) {
+            p.setMaggiorenne(true);
+        } else {
+            p.setMaggiorenne(false);
+        }
+        p.setScorte(Integer.valueOf(spl[4]));
+        return p;
+    }
+
+    public ArrayList ReadFile() throws FileNotFoundException {
+        ArrayList<Prodotto> array = new ArrayList<Prodotto>();
+        Scanner scanner = new Scanner(new File(FilePath));
+        while (scanner.hasNextLine()) {
+            array.add(FromCSS(scanner.nextLine()));
+        }
+        scanner.close();
+        return array;
+    }
+
+    public String toCSS(Prodotto p) {
+        if ("Sigarette.txt".equals(FilePath)) {
+            return p.getNomeProdotto() + ";" + p.getPrezzo() + ";" + p.getImmProdotto() + ";" + p.isMaggiorenne() + ";" + p.getScorte() + "\n";
+        } else if ("Bibite.txt".equals(FilePath)) {
+            return p.getNomeProdotto() + ";" + p.getPrezzo() + ";" + p.getImmProdotto() + ";" + p.isMaggiorenne() + ";" + p.getScorte() + "\n";
+        } else {
+            return p.getNomeProdotto() + ";" + p.getPrezzo() + ";" + p.getImmProdotto() + ";" + p.isMaggiorenne() + ";" + p.getScorte() + "\n";
+        }
+    }
