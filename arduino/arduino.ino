@@ -8,7 +8,7 @@ Prodotto p[20] = Prodotto("", "", false, "");
 LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 String nome, prezzo, scorte, prod = "";
 bool maggiorenne = false;
-int cont = 0,count=0;
+int cont = 0, count = 0;
 int contMenu = 0;
 bool b = false;
 
@@ -29,7 +29,8 @@ void setup()
 
 void loop()
 {
-  while (leggiProdotto());
+  while (leggiProdotto())
+    ;
   menu();
   delay(3000);
 }
@@ -95,10 +96,10 @@ bool leggiProdotto()
         maggiorenne = true;
       }
       prodotto = Prodotto(c1, c2, maggiorenne, c4);
-      p[cont] = prodotto;       
+      p[cont] = prodotto;
       cont++;
-      if(cont>1)
-      lcd.print(p[1].getNome());
+      if (cont > 1)
+        lcd.print(p[1].getNome());
       h++;
     }
     return false;
